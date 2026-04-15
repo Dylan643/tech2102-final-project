@@ -1,14 +1,12 @@
 pipeline {
     agent any
 
+    tools {
+        nodejs 'NodeJS20'
+    }
+
     stages {
         stage('Build') {
-            agent {
-                docker {
-                    image 'node:20'
-                    args '-u root:root'
-                }
-            }
             steps {
                 sh 'npm install'
                 sh 'npm run build'
@@ -16,12 +14,6 @@ pipeline {
         }
 
         stage('Test') {
-            agent {
-                docker {
-                    image 'node:20'
-                    args '-u root:root'
-                }
-            }
             steps {
                 sh 'CI=true npm test -- --watchAll=false'
             }
