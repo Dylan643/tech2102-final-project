@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        nodejs 'NodeJS20'
-    }
-
     stages {
         stage('Build') {
             steps {
@@ -15,7 +11,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh 'CI=true npm test -- --watchAll=false'
+                sh 'npm test -- --watchAll=false'
             }
         }
 
